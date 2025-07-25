@@ -39,7 +39,7 @@
       display: block;
       margin-bottom: 6px;
       font-weight: 600;
-      color: #ea0707;
+      color: #333;
     }
 
     input {
@@ -82,7 +82,7 @@
 </head>
 <body>
   <div class="form-container">
-    <h2>Student Registration Form</h2>
+    <h2>Student Registration</h2>
     <form onsubmit="handleSubmit(event)">
       <label for="name">Full Name</label>
       <input type="text" id="name" name="name" placeholder="Enter your full name" required title="Please enter your full name" />
@@ -97,5 +97,12 @@
     </form>
   </div>
 
+  <script>
+    function handleSubmit(event) {
+      event.preventDefault(); 
+      alert("Registration Successful ✅");
+      event.target.reset(); 
+    }
+  </script>
 </body>
 </html>
