@@ -1,12 +1,19 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8" />
   <title>Student Registration Form</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
     body {
-      font-family: 'Segoe UI', Geneva;
-      background: linear-gradient(to right, #e0f7fa, #b2ebf2);
       margin: 0;
+      padding: 0;
+      background: linear-gradient(to right, #e0f7fa, #b2ebf2);
       display: flex;
       justify-content: center;
       align-items: center;
@@ -15,10 +22,11 @@
 
     .form-container {
       background-color: #fff;
-      padding: 30px 35px;
+      padding: 35px 40px;
       border-radius: 12px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-      width: 320px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 400px;
     }
 
     h2 {
@@ -28,22 +36,30 @@
     }
 
     label {
-      font-weight: 500;
+      display: block;
       margin-bottom: 6px;
-      color: #fc0b0b;
+      font-weight: 600;
+      color: #ea0707;
     }
 
     input {
       width: 100%;
       padding: 10px;
-      margin-bottom: 18px;
+      margin-bottom: 20px;
       border: 1px solid #ccc;
       border-radius: 6px;
+      font-size: 15px;
+      transition: border-color 0.3s;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: #00796b;
     }
 
     button {
       width: 100%;
-      padding: 10px;
+      padding: 12px;
       background-color: #00796b;
       color: white;
       border: none;
@@ -56,23 +72,30 @@
     button:hover {
       background-color: #004d40;
     }
+
+    @media (max-width: 480px) {
+      .form-container {
+        padding: 25px 20px;
+      }
+    }
   </style>
 </head>
 <body>
   <div class="form-container">
     <h2>Student Registration Form</h2>
-    <form>
-      <label for="name">Name</label>
-      <input type="text" id="name" name="name" required>
+    <form onsubmit="handleSubmit(event)">
+      <label for="name">Full Name</label>
+      <input type="text" id="name" name="name" placeholder="Enter your full name" required title="Please enter your full name" />
 
-      <label for="email">Email</label>
-      <input type="email" id="email" name="email" required>
+      <label for="email">Email Address</label>
+      <input type="email" id="email" name="email" placeholder="example@email.com" required title="Enter a valid email address" />
 
       <label for="age">Age</label>
-      <input type="number" id="age" name="age" required>
+      <input type="number" id="age" name="age" min="1" max="100" placeholder="Enter your age" required title="Age must be between 1 and 100" />
 
       <button type="submit">Register</button>
     </form>
   </div>
+
 </body>
 </html>
