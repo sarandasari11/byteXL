@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Banking Interface</title>
 </head>
+  
 <body>
   <div class="container">
     <div class="bank-card">
@@ -23,57 +24,7 @@
     </div>
   </div>
 </body>
-<script>
-    let balance = 0;
-
-function updateDisplay() {
-  document.getElementById('balance').innerText = `₹${balance.toFixed(2)}`;
-}
-
-function handleTransaction(type) {
-  const input = document.getElementById('amountInput');
-  const amount = parseFloat(input.value);
-
-  if (isNaN(amount) || amount <= 0) {
-    alert('Please enter a valid positive amount.');
-    return;
-  }
-
-  if (type === 'withdraw' && amount > balance) {
-    alert('Insufficient balance!');
-    return;
-  }
-
-  balance = type === 'deposit' ? balance + amount : balance - amount;
-  updateDisplay();
-  addToHistory(type, amount, balance);
-
-  input.value = ''; 
-}
-
-function addToHistory(type, amount, updatedBalance) {
-  const list = document.getElementById('transaction-list');
-  const li = document.createElement('li');
-  const time = new Date().toLocaleString();
-
-  li.innerHTML = `
-    <div class="transaction-left">
-      <span class="transaction-type transaction-${type}">
-        ${type.toUpperCase()}
-      </span>
-      <span class="transaction-time">${time}</span>
-    </div>
-    <div class="transaction-amount">₹${amount.toFixed(2)}</div>
-  `;
-
-  li.style.borderLeftColor = type === 'deposit' ? '#28a745' : '#dc3545';
-  list.prepend(li);
-}
-
-updateDisplay();
-
-</script>
- <style>
+   <style>
     * {
   box-sizing: border-box;
   margin: 0;
@@ -211,4 +162,54 @@ button {
 }
 
   </style>
+<script>
+    let balance = 0;
+
+function updateDisplay() {
+  document.getElementById('balance').innerText = `₹${balance.toFixed(2)}`;
+}
+
+function handleTransaction(type) {
+  const input = document.getElementById('amountInput');
+  const amount = parseFloat(input.value);
+
+  if (isNaN(amount) || amount <= 0) {
+    alert('Please enter a valid positive amount.');
+    return;
+  }
+
+  if (type === 'withdraw' && amount > balance) {
+    alert('Insufficient balance!');
+    return;
+  }
+
+  balance = type === 'deposit' ? balance + amount : balance - amount;
+  updateDisplay();
+  addToHistory(type, amount, balance);
+
+  input.value = ''; 
+}
+
+function addToHistory(type, amount, updatedBalance) {
+  const list = document.getElementById('transaction-list');
+  const li = document.createElement('li');
+  const time = new Date().toLocaleString();
+
+  li.innerHTML = `
+    <div class="transaction-left">
+      <span class="transaction-type transaction-${type}">
+        ${type.toUpperCase()}
+      </span>
+      <span class="transaction-time">${time}</span>
+    </div>
+    <div class="transaction-amount">₹${amount.toFixed(2)}</div>
+  `;
+
+  li.style.borderLeftColor = type === 'deposit' ? '#28a745' : '#dc3545';
+  list.prepend(li);
+}
+
+updateDisplay();
+
+</script>
 </html>
