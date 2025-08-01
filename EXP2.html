@@ -69,46 +69,18 @@
 
     .deposit-btn:hover { background-color: #218838; }
     .withdraw-btn:hover { background-color: #c82333; }
+
   </style>
 </head>
 <body>
   <div class="bank-card">
     <h2>Account Balance</h2>
-    <div id="balance" class="balance-display">₹0.00</div>
-    <input type="number" id="amountInput" placeholder="Enter amount" />
+    <div class="balance-display">₹0.00</div>
+    <input type="number" placeholder="Enter amount" />
     <div class="buttons">
-      <button class="deposit-btn" onclick="handleTransaction('deposit')">Deposit</button>
-      <button class="withdraw-btn" onclick="handleTransaction('withdraw')">Withdraw</button>
+      <button class="deposit-btn">Deposit</button>
+      <button class="withdraw-btn">Withdraw</button>
     </div>
   </div>
-
-  <script>
-    let balance = 0;
-
-    function updateDisplay() {
-      document.getElementById('balance').innerText = `₹${balance.toFixed(2)}`;
-    }
-
-    function handleTransaction(type) {
-      const input = document.getElementById('amountInput');
-      const amount = parseFloat(input.value);
-
-      if (isNaN(amount) || amount <= 0) {
-        alert('Please enter a valid amount.');
-        return;
-      }
-
-      if (type === 'withdraw' && amount > balance) {
-        alert('Insufficient balance!');
-        return;
-      }
-
-      balance = type === 'deposit' ? balance + amount : balance - amount;
-      updateDisplay();
-      input.value = '';
-    }
-
-    updateDisplay();
-  </script>
 </body>
 </html>
