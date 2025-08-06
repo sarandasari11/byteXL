@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard</title>
+
+</head>
+<style>
+  :root {
+  --bg-color: #ffffff;
+  --text-color: #333;
+  --card-bg: #04f114;
+  --sidebar-bg: #2c3e50;
+  --sidebar-text: #fff;
+}
+
+body.dark-theme {
+  --bg-color: #1e1e2f;
+  --text-color: #f0f0f0;
+  --card-bg: #2e2e3f;
+  --sidebar-bg: #111827;
+  --sidebar-text: #f0f0f0;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: var(--bg-color);
+  color: var(--text-color);
+}
+
+.dashboard {
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  grid-template-rows: 60px 1fr;
+  grid-template-areas:
+    "header header"
+    "sidebar main"
+    "footer footer";
+  min-height: 100vh;
+}
+
+.sidebar {
+  grid-area: sidebar;
+  background: var(--sidebar-bg);
+  color: var(--sidebar-text);
+  padding: 20px;
+}
+
+.sidebar nav a {
+  display:list-item;
+  color: var(--sidebar-text);
+  text-decoration:underline;
+  padding: 10px;
+}
+
+.header {
+  grid-area: header;
+  background: var(--card-bg);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+}
+
+.footer {
+  grid-area: footer;
+  background: var(--card-bg);
+  text-align: center;
+  line-height: 50px;
+  font-weight: bold;
+}
+
+.header button {
+  padding: 8px 15px;
+  background: var(--sidebar-bg);
+  color: var(--sidebar-text);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.main-content {
+  grid-area: main;
+  padding: 20px;
+}
+
+@media (max-width: 768px) {
+  .dashboard {
+    grid-template-columns: 1fr;
+    grid-template-rows: 60px auto 1fr;
+    grid-template-areas:
+      "header"
+      "sidebar"
+      "main"
+      "footer";
+  }
+
+  .sidebar {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .sidebar nav a {
+    padding: 10px;
+  }
+}
+
+</style>
+<body class="light-theme">
+
+  <div class="dashboard">
+    <aside class="sidebar">
+      <nav>
+        <a href="#">Home</a>
+        <a href="#">Users</a>
+        <a href="#">Settings</a>
+      </nav>
+    </aside>
+
+    <header class="header">
+      <h1>Admin Dashboard</h1>
+      <button id="themeToggle">Switch Theme</button>
+    </header>
+
+    <main class="main-content">
+      <h2>Welcome Admin!</h2><br>
+      <p>This is the main content where you can Add charts,labels or reports here. </p>
+    </main>
+
+     <footer class="footer">
+      © 2025 Admin Dashboard
+    </footer>
+  </div>
+
+  <script>
+    const themeToggle = document.getElementById('themeToggle');
+    const body = document.body;
+
+    themeToggle.addEventListener('click', () => {
+    body.classList.toggle('dark-theme');
+    body.classList.toggle('light-theme');
+  });
+
+  </script>
+</body>
+</html>
