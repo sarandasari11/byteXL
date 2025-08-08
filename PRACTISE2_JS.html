@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Product Filter Page</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #ea7107, #ee0404);
+      margin: 0;
+      padding: 40px;
+      color: #333;
+    }
+
+    .container {
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      max-width: 800px;
+      margin: 0 auto;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    h2 {
+      margin-top: 0;
+    }
+
+    select {
+      padding: 8px 12px;
+      font-size: 16px;
+      margin-bottom: 20px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    .product-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 20px;
+    }
+
+    .product {
+      background-color: #f5f5f5;
+      padding: 15px;
+      border-radius: 8px;
+      text-align: center;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .product h4 {
+      margin: 10px 0 5px;
+    }
+
+    .product p {
+      margin: 0;
+      font-size: 14px;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>Product List</h2>
+    
+    <label for="categoryFilter">Filter by Category:</label>
+    <select id="categoryFilter">
+      <option value="All">All</option>
+      <option value="Shoes">Shoes</option>
+      <option value="Shirts">Shirts</option>
+      <option value="Gadgets">Gadgets</option>
+      <option value="Accessories">Accessories</option>
+    </select>
+
+    <div class="product-list" id="productList">
+      <!-- Products will be dynamically inserted here -->
+    </div>
+  </div>
+
+  <script>
+    const products = [
+      { name: "Running Shoes", category: "Shoes" },
+      { name: "Leather Boots", category: "Shoes" },
+      { name: "Sneakers", category: "Shoes" },
+      { name: "Formal shoes", category: "Shoes" },
+      { name: "Casual Shirt", category: "Shirts" },
+      { name: "Formal Shirt", category: "Shirts" },
+      { name: "T-Shirt", category: "Shirts" },
+      { name: "Polo Shirt", category: "Shirts" },
+      { name: "Laptop", category: "Gadgets" },
+      { name: "Smartphone", category: "Gadgets" },
+      { name: "Tablet", category: "Gadgets" },
+      { name: "Wireless Earbuds", category: "Gadgets" },
+      { name: "Watches", category: "Accessories" },
+      { name: "Sunglasses", category: "Accessories" },
+      { name: "Backpack", category: "Accessories" },
+      { name: "Wallet", category: "Accessories" }
+    ];
+
+    const productList = document.getElementById("productList");
+    const categoryFilter = document.getElementById("categoryFilter");
+
+    function renderProducts(filterCategory) {
+      productList.innerHTML = ""; 
+
+      const filteredProducts = products.filter(product => {
+        return filterCategory === "All" || product.category === filterCategory;
+      });
+
+      if (filteredProducts.length === 0) {
+        productList.innerHTML = "<p>No products found.</p>";
+        return;
+      }
+
+      filteredProducts.forEach(product => {
+        const productDiv = document.createElement("div");
+        productDiv.className = "product";
+        productDiv.innerHTML = `
+          <h4>${product.name}</h4>
+          <p>${product.category}</p>
+        `;
+        productList.appendChild(productDiv);
+      });
+    }
+    renderProducts("All");
+    categoryFilter.addEventListener("change", () => {
+      renderProducts(categoryFilter.value);
+    });
+  </script>
+
+</body>
+</html>
