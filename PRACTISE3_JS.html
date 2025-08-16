@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SVG Drawing Tool</title>
+  <style>
+    body {
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: #f0f0f0;
+      font-family: Arial, sans-serif;
+    }
+    #svgCanvas {
+      border: 1px solid black;
+      width: 600px;
+      height: 400px;
+      background: #fff;
+      cursor: crosshair;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <h2>SVG Drawing Tool</h2>
+    <svg id="svgCanvas"></svg>
+  </div>
+
+  <script>
+    const svg = document.getElementById('svgCanvas');
+    let drawing = false, path;
+
+    svg.addEventListener('mousedown', e => {
+      drawing = true;
+      const {x, y} = svgPos(e);
+      path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+      path.setAttribute("stroke", "blue");
+      path.setAttribute("fill", "none");
+      path.setAttribute("stroke-width", 2);
+      path.setAttribute("d", `M${x},${y}`);
+      svg.appendChild(path);
+    });
+
+    svg.addEventListener('mousemove', e => {
+      if (!drawing) return;
+      const {x, y} = svgPos(e);
+      path.setAttribute("d", path.getAttribute("d") + ` L${x},${y}`);
+    });
+
+    ['mouseup','mouseleave'].forEach(ev =>
+      svg.addEventListener(ev, () => drawing = false)
+    );
+
+    function svgPos(evt) {
+      const r = svg.getBoundingClientRect();
+      return { x: evt.clientX - r.left, y: evt.clientY - r.top };
+    }
+  </script>
+</body>
+</html>
