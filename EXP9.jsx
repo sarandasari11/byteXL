@@ -4,6 +4,7 @@ export default function App() {
       this.name = name;
       this.age = age;
     }
+
     getInfo() {
       return `Name: ${this.name}, Age: ${this.age}`;
     }
@@ -14,6 +15,7 @@ export default function App() {
       super(name, age);
       this.course = course;
     }
+
     getInfo() {
       return `${super.getInfo()}, Course: ${this.course}`;
     }
@@ -24,13 +26,16 @@ export default function App() {
       super(name, age);
       this.subject = subject;
     }
+
     getInfo() {
       return `${super.getInfo()}, Subject: ${this.subject}`;
     }
   }
 
-  const student = new Student("Alice", 20, "Computer Science");
-  const teacher = new Teacher("Mr. Smith", 40, "Math");
+  const student1 = new Student("Saran", 20, "Computer Science");
+  const teacher1 = new Teacher("Mr. Jagjit Singh", 30, "Full Stack");
+
+  const people = [student1, teacher1];
 
   return (
     <div
@@ -47,8 +52,23 @@ export default function App() {
       }}
     >
       <h1>Person Class Hierarchy</h1>
-      <p>{student.getInfo()}</p>
-      <p>{teacher.getInfo()}</p>
+
+      <div style={{ width: "350px" }}>
+        {people.map((p, index) => (
+          <div
+            key={index}
+            style={{
+              border: "1px solid #ccc",
+              borderRadius: "8px",
+              padding: "10px",
+              margin: "10px 0",
+              textAlign: "left",
+            }}
+          >
+            {p.getInfo()}
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
