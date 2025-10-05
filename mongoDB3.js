@@ -10,13 +10,13 @@ mongoose.connect("mongodb://127.0.0.1:27017/ecommerceDB", {
   useNewUrlParser: true,
   useUnifiedTopology: true
 })
-.then(() => console.log("✅ MongoDB Connected"))
-.catch(err => console.error("❌ MongoDB error:", err));
+.then(() => console.log(" MongoDB Connected"))
+.catch(err => console.error(" MongoDB error:", err));
 
 app.use("/products", productRoutes);
 
 const PORT = 3000;
-app.listen(PORT, () => console.log(`🚀 Server running at http://localhost:${PORT}`));
+app.listen(PORT, () => console.log(` Server running at http://localhost:${PORT}`));
 
 
 //produt.js
