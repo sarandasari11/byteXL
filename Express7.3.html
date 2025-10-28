@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-Time Chat Mockup</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 40px;
+        }
+
+        .chat-container {
+            width: 450px;
+            height: 550px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .chat-header {
+            background-color: #3f51b5;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 1.2em;
+        }
+
+        .username-input {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            border: none;
+            border-bottom: 1px solid #ddd;
+            font-size: 1em;
+            text-align: center;
+            background-color: #eee;
+        }
+
+        .chat-messages {
+            flex-grow: 1;
+            padding: 15px;
+            overflow-y: auto;
+            background-color: #f9f9f9;
+        }
+
+        .message-row {
+            display: flex;
+            margin-bottom: 10px;
+        }
+
+        .my-message {
+            justify-content: flex-end;
+        }
+
+        .other-message {
+            justify-content: flex-start;
+        }
+
+        .message-content {
+            padding: 8px 12px;
+            border-radius: 18px;
+            max-width: 70%;
+            word-wrap: break-word;
+            font-size: 0.95em;
+        }
+
+        .my-message .message-content {
+            background-color: #dcf8c6;
+        }
+
+        .other-message .message-content {
+            background-color: #ffffff;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .message-meta {
+            font-size: 0.75em;
+            color: #777;
+            margin-top: 2px;
+            text-align: right;
+        }
+        
+        .author-time {
+            font-weight: bold;
+            margin-right: 5px;
+        }
+
+        .chat-footer {
+            display: flex;
+            padding: 10px;
+            border-top: 1px solid #ccc;
+            background-color: #fff;
+        }
+
+        .message-input {
+            flex-grow: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-right: 10px;
+        }
+
+        .send-button {
+            padding: 10px 20px;
+            background-color: #2196F3;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+
+        /* Mockup specific styles for the two columns */
+        .alice-chat { margin-right: 20px; }
+        .bob-chat { margin-left: 20px; }
+    </style>
+</head>
+<body>
+
+    <div class="chat-container alice-chat" id="alice-window">
+        <div class="chat-header">Real-Time Chat</div>
+        <input type="text" class="username-input" value="Alice" readonly>
+        <div class="chat-messages">
+            <div class="message-row my-message">
+                <div class="message-content">
+                    Hi Bob
+                    <div class="message-meta">
+                        <span class="author-time">Alice [11:25:18]:</span> 
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="chat-footer">
+            <input type="text" class="message-input" placeholder="Type your message...">
+            <button class="send-button">Send</button>
+        </div>
+    </div>
+
+    <div class="chat-container bob-chat" id="bob-window">
+        <div class="chat-header">Real-Time Chat</div>
+        <input type="text" class="username-input" value="Bob" readonly>
+        <div class="chat-messages">
+            <div class="message-row other-message">
+                <div class="message-content">
+                    Hi Bob
+                    <div class="message-meta">
+                        <span class="author-time">Alice [11:25:18]:</span> 
+                    </div>
+                </div>
+            </div>
+            <div class="message-row my-message">
+                <div class="message-content">
+                    Hey Alice
+                    <div class="message-meta">
+                        <span class="author-time">Bob [11:27:50]:</span> 
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="chat-footer">
+            <input type="text" class="message-input" placeholder="Type your message...">
+            <button class="send-button">Send</button>
+        </div>
+    </div>
+
+    <script>
+        // NOTE: This JavaScript is just for demonstration of the layout. 
+        // A truly working real-time chat requires a server-side component (Node.js/Socket.IO)
+        // and a client-side library (socket.io-client) to handle network traffic.
+
+        // Basic function to simulate sending and receiving a message within the same window
+        function addMessage(windowId, author, message, isMe) {
+            const chatMessages = document.querySelector(`#${windowId} .chat-messages`);
+            const time = new Date().toLocaleTimeString('en-US', { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' });
+
+            const rowClass = isMe ? 'my-message' : 'other-message';
+            const html = `
+                <div class="message-row ${rowClass}">
+                    <div class="message-content">
+                        ${message}
+                        <div class="message-meta">
+                            <span class="author-time">${author} [${time}]:</span> 
+                        </div>
+                    </div>
+                </div>
+            `;
+            chatMessages.insertAdjacentHTML('beforeend', html);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        // Example: If you wanted to make the 'Send' button add a message locally (not real-time)
+        document.querySelectorAll('.send-button').forEach(button => {
+            button.addEventListener('click', (e) => {
+                const container = e.target.closest('.chat-container');
+                const input = container.querySelector('.message-input');
+                const username = container.querySelector('.username-input').value;
+                const message = input.value;
+        
+                if (message.trim()) {
+                    addMessage(container.id, username, message, true);
+                    input.value = '';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
