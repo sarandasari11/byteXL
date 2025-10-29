@@ -1,0 +1,79 @@
+# Node dependencies
+node_modules/
+
+# Environment files
+# Ignore local env files which may contain secrets
+.env
+.env.*.local
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Runtime data
+pids/
+*.pid
+*.pid.lock
+
+# Test coverage
+coverage/
+.nyc_output/
+
+# Build output
+dist/
+build/
+out/
+public/build/
+
+# Caches and caches used by various tools
+.cache/
+.parcel-cache/
+
+# Framework-specific
+.next/
+.nuxt/
+
+# Serverless
+.serverless/
+
+# Misc
+*.tgz
+.local
+
+# OS generated files
+.DS_Store
+Thumbs.db
+desktop.ini
+ehthumbs.db
+$RECYCLE.BIN/
+
+# Editors and IDEs
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.iml
+
+# Node REPL history
+.node_repl_history
+
+# TypeScript
+*.tsbuildinfo
+
+# Deployment and platform tool folders
+.vercel/
+.firebase/
+.turbo/
+
+# Optional: lockfiles or pnp if you manage them locally (uncomment if needed)
+# pnpm-lock.yaml
+# .pnp.*
+node_modules
+.env
+.env.local
