@@ -1,0 +1,42 @@
+name: React App CI/CD with GitHub Pages
+
+on:
+  push:
+    branches: [main]   # Runs on every push to main
+  pull_request:
+    branches: [main]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    name: Build, Test, and Deploy React App
+
+    steps:
+      # 1️⃣ Checkout repository code
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 2️⃣ Set up Node.js environment
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      # 3️⃣ Install dependencies
+      - name: Install dependencies
+        run: npm install
+
+      # 4️⃣ Run tests (optional, only if you have them)
+      - name: Run tests
+        run: npm test --if-present
+
+      # 5️⃣ Build React project
+      - name: Build project
+        run: npm run build
+
+      # 6️⃣ Deploy to GitHub Pages
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build
